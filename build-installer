@@ -1,5 +1,5 @@
 #!/bin/bash
-SOURCE_DIR=$(readlink --canonicalize $(dirname $0))
-erb pop-pixie.iss.erb > pop-pixie.iss &&
-  docker run --rm -i -v "$SOURCE_DIR:/work" amake/innosetup pop-pixie.iss &&
+cd $(dirname "$0") &&
+  erb pop-pixie.iss.erb > pop-pixie.iss &&
+  docker run --rm -i -v "$(pwd):/work" amake/innosetup pop-pixie.iss &&
   rm pop-pixie.iss
